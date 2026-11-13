@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, type FC, type DragEvent, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsPDF } from 'jspdf';
+import { SEO } from '../SEO';
+import { ToolInfoSection } from '../ToolInfoSection';
 import {
   UploadCloud,
   FileText,
@@ -320,6 +322,7 @@ export const ImageToPdf: FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+      <SEO pageKey="imageToPdf" canonicalPath="/image-to-pdf" />
       
       {/* Header section */}
       <div className="text-center space-y-3">
@@ -735,6 +738,9 @@ export const ImageToPdf: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Enrichissement du contenu SEO & Anti-Thin Content */}
+      <ToolInfoSection toolId="image-to-pdf" />
 
     </div>
   );

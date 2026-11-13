@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback, type FC, type DragEvent, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '../SEO';
+import { ToolInfoSection } from '../ToolInfoSection';
 import {
   UploadCloud,
   FileImage,
@@ -384,6 +386,7 @@ export const ConvertImage: FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+      <SEO pageKey="convert" canonicalPath="/convert" />
       
       {/* Header section */}
       <div className="text-center space-y-3">
@@ -785,6 +788,9 @@ export const ConvertImage: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Enrichissement du contenu SEO & Anti-Thin Content */}
+      <ToolInfoSection toolId="convert" />
 
     </div>
   );

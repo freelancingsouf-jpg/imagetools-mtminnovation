@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, type FC, type DragEvent, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PDFDocument } from 'pdf-lib';
+import { SEO } from '../SEO';
+import { ToolInfoSection } from '../ToolInfoSection';
 import {
   UploadCloud,
   FileText,
@@ -258,6 +260,7 @@ export const MergePdf: FC = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEO pageKey="mergePdf" canonicalPath="/merge-pdf" />
       {/* Header section with badge */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -544,6 +547,9 @@ export const MergePdf: FC = () => {
 
         </div>
       )}
+
+      {/* Enrichissement du contenu SEO & Anti-Thin Content */}
+      <ToolInfoSection toolId="merge-pdf" />
     </div>
   );
 };

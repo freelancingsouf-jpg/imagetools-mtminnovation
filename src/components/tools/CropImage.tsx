@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useCallback, type FC, type DragEvent, type
 import { useTranslation } from 'react-i18next';
 import ReactCrop, { type Crop, type PixelCrop, centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import { SEO } from '../SEO';
+import { ToolInfoSection } from '../ToolInfoSection';
 import {
   UploadCloud,
   FileImage,
@@ -376,6 +378,7 @@ export const CropImage: FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+      <SEO pageKey="crop" canonicalPath="/crop" />
       
       {/* Header section */}
       <div className="text-center space-y-3">
@@ -728,6 +731,9 @@ export const CropImage: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Enrichissement du contenu SEO & Anti-Thin Content */}
+      <ToolInfoSection toolId="crop" />
 
     </div>
   );

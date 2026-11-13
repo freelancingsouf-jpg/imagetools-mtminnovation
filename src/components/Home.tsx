@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { SEO } from './SEO';
 import {
   Search,
   Sparkles,
@@ -226,6 +227,7 @@ export const Home: FC = () => {
 
   return (
     <div className="w-full flex flex-col">
+      <SEO pageKey="home" canonicalPath="/" />
       
       {/* 1. Hero Section with MTM Innovation Gradient */}
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/10 via-secondary/5 to-slate-50 border-b border-slate-200/70 pt-16 pb-20 px-4 sm:px-6 lg:px-8">

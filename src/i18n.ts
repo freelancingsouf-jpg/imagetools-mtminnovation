@@ -51,6 +51,76 @@ export const resources = {
         pdfToJpg: 'PDF vers JPG',
         privacy: 'Confidentialité',
       },
+      seo: {
+        home: {
+          title: 'Outils d’images et PDF 100% Locaux',
+          description: 'Boîte à outils en ligne gratuite pour compresser, convertir, redimensionner vos images et fusionner, diviser vos PDF. Traitement 100% local, privé et sécurisé.',
+        },
+        compress: {
+          title: 'Compresser des images en ligne',
+          description: 'Compressez vos images JPG, PNG et WebP en ligne gratuitement sans perte de qualité visible. Traitement 100% local et privé.',
+        },
+        resize: {
+          title: 'Redimensionner une image en ligne',
+          description: 'Modifiez les dimensions de vos images en pixels avec précision et conservation du ratio. Outil 100% local et gratuit.',
+        },
+        convert: {
+          title: 'Convertir une image en JPG, PNG, WebP',
+          description: 'Convertissez instantanément vos fichiers image dans le navigateur sans envoyer vos données sur un serveur.',
+        },
+        crop: {
+          title: 'Recadrer une image en ligne',
+          description: 'Recadrez facilement vos photos avec des ratios prédéfinis ou sur mesure. Traitement haute définition 100% privé.',
+        },
+        rotateFlip: {
+          title: 'Faire pivoter ou retourner une image',
+          description: 'Pivotez à 90° et appliquez un effet miroir horizontal ou vertical à vos photos en un clic sans perte.',
+        },
+        watermark: {
+          title: 'Ajouter un filigrane sur une image',
+          description: 'Protégez vos créations en ajoutant un texte ou copyright personnalisé sur vos images directement dans votre navigateur.',
+        },
+        imageToPdf: {
+          title: 'Convertir des images en PDF',
+          description: 'Assemblez plusieurs photos JPG ou PNG en un document PDF propre au format A4 en toute sécurité.',
+        },
+        mergePdf: {
+          title: 'Fusionner des fichiers PDF en ligne',
+          description: 'Combinez plusieurs documents PDF en un seul fichier consolidé. Réorganisation facile et traitement 100% local.',
+        },
+        splitPdf: {
+          title: 'Diviser ou extraire des pages PDF',
+          description: 'Extrayez des pages spécifiques ou découpez vos documents PDF en toute confidentialité sans aucun téléversement.',
+        },
+        rotatePdf: {
+          title: 'Faire pivoter un PDF en ligne',
+          description: 'Redressez l’orientation de vos documents PDF scannés de 90° ou 180° facilement et gratuitement.',
+        },
+        deletePdfPages: {
+          title: 'Supprimer des pages d’un PDF',
+          description: 'Supprimez des pages inutiles ou confidentielles de vos fichiers PDF en quelques secondes en toute sécurité.',
+        },
+        pdfToJpg: {
+          title: 'Convertir un PDF en images JPG',
+          description: 'Transformez chaque page d’un PDF en image JPG haute définition et téléchargez-les individuellement ou en archive ZIP.',
+        },
+        about: {
+          title: 'À propos de MTM Innovation',
+          description: 'Découvrez la vision d’ImageTools par MTM Innovation : des outils puissants, gratuits et respectueux de la vie privée.',
+        },
+        contact: {
+          title: 'Contactez-nous',
+          description: 'Contactez l’équipe d’ImageTools par MTM Innovation pour vos questions, suggestions ou partenariats.',
+        },
+        privacy: {
+          title: 'Politique de confidentialité',
+          description: 'Politique de confidentialité d’ImageTools : 100% traitement local, aucune donnée ni fichier transmis à un serveur.',
+        },
+        terms: {
+          title: 'Conditions d’utilisation',
+          description: 'Consultez les conditions générales d’utilisation des outils gratuits ImageTools par MTM Innovation.',
+        },
+      },
       tools: {
         compress: {
           title: 'Compresser une image',
@@ -485,6 +555,76 @@ export const resources = {
         deletePdfPages: 'Delete PDF Pages',
         pdfToJpg: 'PDF to JPG',
         privacy: 'Privacy',
+      },
+      seo: {
+        home: {
+          title: '100% Client-Side Image & PDF Tools',
+          description: 'Free online toolbox to compress, convert, resize images and merge, split PDF files. 100% client-side, private, and secure.',
+        },
+        compress: {
+          title: 'Compress Images Online',
+          description: 'Compress JPG, PNG, and WebP images online for free without visible loss of quality. 100% local and private processing.',
+        },
+        resize: {
+          title: 'Resize Images Online',
+          description: 'Modify image dimensions in pixels with precision and locked aspect ratio. 100% client-side, free and private.',
+        },
+        convert: {
+          title: 'Convert Images to JPG, PNG, WebP',
+          description: 'Instantly convert your image files inside your browser without uploading data to any external server.',
+        },
+        crop: {
+          title: 'Crop Images Online',
+          description: 'Easily crop photos with preset or custom aspect ratios. High-definition output with 100% local confidentiality.',
+        },
+        rotateFlip: {
+          title: 'Rotate or Flip Images Online',
+          description: 'Rotate 90 degrees or mirror images horizontally and vertically in one click without losing original quality.',
+        },
+        watermark: {
+          title: 'Add Watermark to Images',
+          description: 'Protect your photos by applying custom watermark text or copyright badges directly inside your browser.',
+        },
+        imageToPdf: {
+          title: 'Convert Images to PDF',
+          description: 'Combine multiple JPG, PNG, or WebP photos into a clean, printable A4 PDF document securely.',
+        },
+        mergePdf: {
+          title: 'Merge PDF Files Online',
+          description: 'Combine multiple PDF documents into a single consolidated file with easy reordering and 100% local processing.',
+        },
+        splitPdf: {
+          title: 'Split or Extract PDF Pages',
+          description: 'Extract specific pages or split PDF documents with full privacy and zero server uploads.',
+        },
+        rotatePdf: {
+          title: 'Rotate PDF Pages Online',
+          description: 'Correct orientation of upside-down or scanned PDF documents by 90° or 180° quickly and for free.',
+        },
+        deletePdfPages: {
+          title: 'Delete Pages from PDF',
+          description: 'Remove unwanted or sensitive pages from your PDF documents in seconds with complete confidentiality.',
+        },
+        pdfToJpg: {
+          title: 'Convert PDF to JPG Images',
+          description: 'Transform each page of a PDF document into high-resolution JPG images and download individually or as a ZIP archive.',
+        },
+        about: {
+          title: 'About MTM Innovation',
+          description: 'Discover the vision behind ImageTools by MTM Innovation: powerful, free, and privacy-respecting client-side tools.',
+        },
+        contact: {
+          title: 'Contact Us',
+          description: 'Get in touch with the ImageTools team at MTM Innovation for inquiries, support, feedback, or partnerships.',
+        },
+        privacy: {
+          title: 'Privacy Policy',
+          description: 'ImageTools privacy policy: 100% local processing, zero files or telemetry transmitted to external servers.',
+        },
+        terms: {
+          title: 'Terms of Use',
+          description: 'Read the terms and conditions for using free client-side utilities provided by ImageTools by MTM Innovation.',
+        },
       },
       tools: {
         compress: {
@@ -921,6 +1061,76 @@ export const resources = {
         pdfToJpg: 'PDF إلى JPG',
         privacy: 'الخصوصية',
       },
+      seo: {
+        home: {
+          title: 'أدوات الصور وملفات PDF المحلية 100٪',
+          description: 'مجموعة أدوات مجانية عبر الإنترنت لضغط وتحويل وتغيير حجم الصور ودمج وتقسيم ملفات PDF محلياً وبأمان تام.',
+        },
+        compress: {
+          title: 'ضغط الصور أونلاين',
+          description: 'اضغط صور JPG و PNG و WebP مجاناً بدون فقدان ملحوظ للجودة. معالجة محلية وخاصة 100٪ داخل متصفحك.',
+        },
+        resize: {
+          title: 'تغيير حجم الصور أونلاين',
+          description: 'عدّل مقاسات وأبعاد صورك بالبكسل بدقة مع الحفاظ على التناسب. أداة مجانية ومحلية بالكامل.',
+        },
+        convert: {
+          title: 'تحويل صيغ الصور إلى JPG و PNG و WebP',
+          description: 'حول صورك فوراً داخل المتصفح دون إرسال أي ملفات إلى خوادم خارجية لحماية خصوصيتك.',
+        },
+        crop: {
+          title: 'قص الصور أونلاين بدقة',
+          description: 'قص صورك بسهولة باستخدام نسب أبعاد محددة أو مخصصة مع الحفاظ على أعلى درجات الدقة والخصوصية.',
+        },
+        rotateFlip: {
+          title: 'تدوير وقلب الصور أونلاين',
+          description: 'دوّر بزاوية 90 درجة أو اقلب الصور أفقياً وعمودياً بنقرة واحدة وبدون أي خسارة في الجودة.',
+        },
+        watermark: {
+          title: 'إضافة علامة مائية على الصور',
+          description: 'احمِ صورك وتصاميمك بإضافة علامة مائية أو توقيع مخصص داخل متصفحك دون اتصال خارجي.',
+        },
+        imageToPdf: {
+          title: 'تحويل الصور إلى مستند PDF',
+          description: 'اجمع عدة صور JPG أو PNG في مستند PDF منسق بمقاس A4 بسهولة وبأمان فائق.',
+        },
+        mergePdf: {
+          title: 'دمج ملفات PDF أونلاين',
+          description: 'اجمع عدة مستندات PDF في ملف موحد مع إمكانية ترتيب الصفحات ومعالجة محلية 100٪.',
+        },
+        splitPdf: {
+          title: 'تقسيم واستخراج صفحات PDF',
+          description: 'استخرج صفحات معينة أو قسّم ملفات PDF بخصوصية تامة دون أي رفع للملفات.',
+        },
+        rotatePdf: {
+          title: 'تدوير صفحات PDF أونلاين',
+          description: 'صحح اتجاه صفحات PDF الممسوحة ضوئياً بزاوية 90 أو 180 درجة مجاناً وبسرعة.',
+        },
+        deletePdfPages: {
+          title: 'حذف صفحات من مستند PDF',
+          description: 'احذف الصفحات غير المرغوب فيها أو الحساسة من ملفات PDF بأمان وفي ثوانٍ معدودة.',
+        },
+        pdfToJpg: {
+          title: 'تحويل PDF إلى صور JPG عالية الدقة',
+          description: 'حول صفحات PDF إلى صور JPG فائقة الوضوح وحملها كصور منفصلة أو في أرشيف ZIP مضغوط.',
+        },
+        about: {
+          title: 'حول MTM Innovation',
+          description: 'تعرف على رؤية ImageTools من MTM Innovation: أدوات رقمية قوية ومجانية تحمي الخصوصية بالكامل.',
+        },
+        contact: {
+          title: 'اتصل بنا',
+          description: 'تواصل مع فريق ImageTools في MTM Innovation للاستفسارات والدعم والشراكات.',
+        },
+        privacy: {
+          title: 'سياسة الخصوصية',
+          description: 'سياسة خصوصية ImageTools: معالجة محلية 100٪، بدون رفع أي ملفات أو بيانات إلى أي خوادم.',
+        },
+        terms: {
+          title: 'شروط الاستخدام',
+          description: 'اطلع على الشروط والأحكام الخاصة باستخدام أدوات ImageTools المجانية من MTM Innovation.',
+        },
+      },
       tools: {
         compress: {
           title: 'ضغط الصور',
@@ -1355,6 +1565,76 @@ export const resources = {
         deletePdfPages: '删除 PDF 页面',
         pdfToJpg: 'PDF 转 JPG',
         privacy: '隐私安全',
+      },
+      seo: {
+        home: {
+          title: '100% 浏览器本地图片与 PDF 工具箱',
+          description: '免费在线图片与 PDF 工具箱，提供压缩、转换、缩放、合并、拆分等功能。100% 纯客户端本地计算，严格保护隐私安全。',
+        },
+        compress: {
+          title: '在线压缩图片',
+          description: '免费在线压缩 JPG、PNG 和 WebP 图片，保持高清画质同时大幅减小文件体积。100% 本地计算且保密。',
+        },
+        resize: {
+          title: '在线调整图片尺寸',
+          description: '像素级精准调整图片宽高度并锁定宽高比。完全在浏览器本地计算，安全高效。',
+        },
+        convert: {
+          title: '图片格式转换为 JPG、PNG、WebP',
+          description: '在浏览器中即时转换图片格式，无需上传任何数据到远程服务器，严密守护隐私。',
+        },
+        crop: {
+          title: '在线裁剪图片',
+          description: '轻松使用预设或自定义比例裁剪图片，无损生成高分辨率画质，全程本地处理。',
+        },
+        rotateFlip: {
+          title: '在线旋转与翻转图片',
+          description: '一键 90 度旋转或水平/垂直镜像翻转照片，保持原画画质，瞬间生成。',
+        },
+        watermark: {
+          title: '为图片添加防盗水印',
+          description: '直接在浏览器中为您的照片与设计图添加自定义版权水印文本，免上传防盗用。',
+        },
+        imageToPdf: {
+          title: '图片转换为 PDF 文档',
+          description: '将多张 JPG 或 PNG 图片安全合并为整洁的标准 A4 PDF 文档，支持直接打印。',
+        },
+        mergePdf: {
+          title: '在线合并 PDF 文件',
+          description: '将多个 PDF 文件合并为一个完整文档，支持自由重排先后顺序，100% 本地运算。',
+        },
+        splitPdf: {
+          title: '拆分或提取 PDF 页面',
+          description: '精准提取所需页码或拆分 PDF 文件，零服务器上传，彻底杜绝数据泄露。',
+        },
+        rotatePdf: {
+          title: '在线旋转 PDF 页面',
+          description: '快速矫正扫描倒置的 PDF 页面方向，支持 90 度或 180 度顺逆时针调整。',
+        },
+        deletePdfPages: {
+          title: '删除 PDF 冗余页面',
+          description: '几秒内安全移除 PDF 文档中的空白页或机密页面，生成清爽整洁的新文件。',
+        },
+        pdfToJpg: {
+          title: 'PDF 转换为高清 JPG 图片',
+          description: '将 PDF 各页渲染为高清晰度 JPG 图片，支持逐页下载或一键导出 ZIP 压缩包。',
+        },
+        about: {
+          title: '关于 MTM Innovation',
+          description: '了解 MTM Innovation 旗下 ImageTools 的品牌愿景：打造强大、免费且捍卫隐私的纯客户端工具。',
+        },
+        contact: {
+          title: '联系我们',
+          description: '欢迎联系 MTM Innovation ImageTools 团队，咨询业务合作、功能反馈或技术支持。',
+        },
+        privacy: {
+          title: '隐私政策',
+          description: 'ImageTools 隐私政策：100% 浏览器端本地运算，绝不收集或上传您的任何文件与隐私数据。',
+        },
+        terms: {
+          title: '使用条款',
+          description: '阅读 MTM Innovation 提供的 ImageTools 免费在线实用工具的服务协议与使用条款。',
+        },
       },
       tools: {
         compress: {

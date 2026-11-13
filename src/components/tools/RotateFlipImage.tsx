@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback, type FC, type DragEvent, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '../SEO';
+import { ToolInfoSection } from '../ToolInfoSection';
 import {
   UploadCloud,
   FileImage,
@@ -365,6 +367,7 @@ export const RotateFlipImage: FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+      <SEO pageKey="rotateFlip" canonicalPath="/rotate-flip" />
       
       {/* Header section */}
       <div className="text-center space-y-3">
@@ -785,10 +788,13 @@ export const RotateFlipImage: FC = () => {
           </div>
           <div>
             <h4 className="font-bold text-dark text-sm">Conservation du Ratio</h4>
-            <p className="text-xs text-slate-500 mt-0.5">Adaptation automatique des dimensions $L \times H$ selon l'angle.</p>
+            <p className="text-xs text-slate-500 mt-0.5">Adaptation automatique des dimensions L × H selon l'angle.</p>
           </div>
         </div>
       </div>
+
+      {/* Enrichissement du contenu SEO & Anti-Thin Content */}
+      <ToolInfoSection toolId="rotate-flip" />
 
     </div>
   );

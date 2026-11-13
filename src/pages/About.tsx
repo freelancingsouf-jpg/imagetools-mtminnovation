@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import {
   Sparkles,
   ShieldCheck,
@@ -18,6 +19,7 @@ export const About: FC = () => {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <SEO pageKey="about" canonicalPath="/about" />
       {/* Navigation Breadcrumb */}
       <div className="mb-6 flex items-center gap-2 text-sm text-slate-500">
         <Link
