@@ -67,7 +67,7 @@ export const MTM_APPS_RAW: Omit<MtmApp, 'isCurrent'>[] = [
   {
     id: 'mtmproforma',
     name: 'MTM Proforma',
-    url: 'https://mtm-proforma.pages.dev',
+    url: 'https://proforma-mtminnovation.pages.dev',
     icon: Receipt,
     color: {
       text: 'text-emerald-600',
