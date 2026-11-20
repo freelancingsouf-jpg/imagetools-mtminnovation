@@ -1,10 +1,12 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Sparkles, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { getOtherMtmApps } from '../config/mtmApps';
 
 export const Footer: FC = () => {
   const { t } = useTranslation();
+  const otherApps = getOtherMtmApps();
 
   return (
     <footer className="w-full bg-white border-t border-slate-200 mt-auto pt-10 pb-8 transition-colors">
@@ -126,6 +128,51 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
+        </div>
+
+        {/* Minimal Unified Ecosystem Section (Other 3 Apps) */}
+        <div className="py-6 border-b border-slate-100">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex items-center gap-2 shrink-0">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                {t('ecosystem.moreApps')}
+              </h4>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 flex-1 lg:max-w-3xl">
+              {otherApps.map((app) => {
+                const Icon = app.icon;
+                const appName = t(`${app.translationKey}.name`, app.name);
+                const appTagline = t(`${app.translationKey}.tagline`);
+
+                return (
+                  <a
+                    key={app.id}
+                    href={app.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between p-2.5 rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className={`w-7 h-7 rounded-lg ${app.color.bg} ${app.color.text} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-bold text-slate-900 group-hover:text-primary transition-colors block truncate">
+                          {appName}
+                        </span>
+                        <span className="text-[10px] text-slate-500 block truncate">
+                          {appTagline}
+                        </span>
+                      </div>
+                    </div>
+                    <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-primary transition-colors ms-1 shrink-0 opacity-60 group-hover:opacity-100" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}

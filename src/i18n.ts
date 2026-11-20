@@ -464,6 +464,36 @@ export const resources = {
           errorProcessing: 'Une erreur est survenue lors de la conversion des pages en JPG.',
         },
       },
+      ecosystem: {
+        title: 'Écosystème MTM Innovation',
+        subtitle: 'Applications web rapides, locales et intelligentes',
+        moreApps: 'Autres outils de MTM Innovation',
+        currentBadge: 'Actuel',
+        switcherAria: 'Changer d’application MTM',
+        openInNewTab: 'Ouvrir dans un nouvel onglet',
+        apps: {
+          easypdf: {
+            name: 'EasyPDF',
+            tagline: 'Traitement & conversion PDF',
+            desc: 'Fusion, division et conversion PDF 100% locales',
+          },
+          imagetools: {
+            name: 'ImageTools',
+            tagline: 'Édition & conversion d’images',
+            desc: 'Compression, redimensionnement et filigrane sans upload',
+          },
+          mtmproforma: {
+            name: 'MTM Proforma',
+            tagline: 'Factures & devis proforma',
+            desc: 'Édition et génération instantanée de factures proforma',
+          },
+          mtminnovation: {
+            name: 'MTM Innovation',
+            tagline: 'Plateforme & vitrine officielle',
+            desc: 'Découvrez notre suite d’outils digitaux innovants',
+          },
+        },
+      },
       footer: {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: '100% Local & Sécurisé',
@@ -967,6 +997,36 @@ export const resources = {
           pageBadge: 'Page {{num}}',
           errorInvalidType: 'Please select a valid PDF file.',
           errorProcessing: 'An error occurred while converting PDF to JPG.',
+        },
+      },
+      ecosystem: {
+        title: 'MTM Innovation Ecosystem',
+        subtitle: 'Fast, local, and smart web applications',
+        moreApps: 'More from MTM Innovation',
+        currentBadge: 'Current',
+        switcherAria: 'Switch MTM applications',
+        openInNewTab: 'Open in a new tab',
+        apps: {
+          easypdf: {
+            name: 'EasyPDF',
+            tagline: 'PDF processing & conversion',
+            desc: '100% local PDF merge, split, and conversion',
+          },
+          imagetools: {
+            name: 'ImageTools',
+            tagline: 'Image editing & conversion',
+            desc: 'Compression, resizing, and watermark without uploads',
+          },
+          mtmproforma: {
+            name: 'MTM Proforma',
+            tagline: 'Proforma & invoice generator',
+            desc: 'Instant proforma invoice creation and export',
+          },
+          mtminnovation: {
+            name: 'MTM Innovation',
+            tagline: 'Main platform & showcase',
+            desc: 'Discover our suite of innovative digital tools',
+          },
         },
       },
       footer: {
@@ -1474,6 +1534,36 @@ export const resources = {
           errorProcessing: 'حدث خطأ أثناء تحويل ملف PDF إلى JPG.',
         },
       },
+      ecosystem: {
+        title: 'منظومة MTM Innovation',
+        subtitle: 'تطبيقات ويب سريعة ومحلية وذكية',
+        moreApps: 'أدوات أخرى من MTM Innovation',
+        currentBadge: 'الحالي',
+        switcherAria: 'التبديل بين تطبيقات MTM',
+        openInNewTab: 'فتح في علامة تبويب جديدة',
+        apps: {
+          easypdf: {
+            name: 'EasyPDF',
+            tagline: 'معالجة وتحويل ملفات PDF',
+            desc: 'دمج وتقسيم وتحويل PDF محلياً 100٪ بدون رفع',
+          },
+          imagetools: {
+            name: 'ImageTools',
+            tagline: 'معالجة وتعديل الصور',
+            desc: 'ضغط وتغيير حجم وعلامات مائية محلية بدون خوادم',
+          },
+          mtmproforma: {
+            name: 'MTM Proforma',
+            tagline: 'منشئ الفواتير وعروض الأسعار',
+            desc: 'إنشاء وتصدير الفواتير الاحترافية فورياً',
+          },
+          mtminnovation: {
+            name: 'MTM Innovation',
+            tagline: 'المنصة الرئيسية والمشاريع',
+            desc: 'اكتشف باقة أدواتنا وحلولنا الرقمية المبتكرة',
+          },
+        },
+      },
       footer: {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: 'معالجة محلية وآمنة 100%',
@@ -1977,6 +2067,36 @@ export const resources = {
           pageBadge: '第 {{num}} 页',
           errorInvalidType: '请选择有效的 PDF 格式文件。',
           errorProcessing: 'PDF 转 JPG 过程中发生错误，请重试。',
+        },
+      },
+      ecosystem: {
+        title: 'MTM Innovation 产品矩阵',
+        subtitle: '极速、纯本地且智能的现代 Web 应用',
+        moreApps: '更多 MTM Innovation 产品',
+        currentBadge: '当前应用',
+        switcherAria: '切换 MTM 应用',
+        openInNewTab: '在新标签页中打开',
+        apps: {
+          easypdf: {
+            name: 'EasyPDF',
+            tagline: 'PDF 处理与格式转换',
+            desc: '100% 浏览器本地 PDF 合并、拆分与转换',
+          },
+          imagetools: {
+            name: 'ImageTools',
+            tagline: '图片编辑与格式转换',
+            desc: '纯本地图片压缩、尺寸调整与防盗水印',
+          },
+          mtmproforma: {
+            name: 'MTM Proforma',
+            tagline: '形式发票与专业账单生成器',
+            desc: '快速制作并导出合规形式发票与报价单',
+          },
+          mtminnovation: {
+            name: 'MTM Innovation',
+            tagline: '官方主页与创新技术展示',
+            desc: '探索 MTM Innovation 旗下全套前沿数字工具',
+          },
         },
       },
       footer: {

@@ -2,6 +2,8 @@ import { useState, type FC, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Link } from 'react-router-dom';
 import { changeLanguage } from '../i18n';
+import { MtmAppSwitcher } from './MtmAppSwitcher';
+import { getMtmApps } from '../config/mtmApps';
 import {
   Globe,
   Sparkles,
@@ -26,6 +28,7 @@ import {
 export const Navbar: FC = () => {
   const { i18n, t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const apps = getMtmApps();
 
   // Normalize current language to 2 characters (fr, en, ar, zh)
   const currentLang = i18n.language?.toLowerCase().split('-')[0].split('_')[0] || 'fr';
@@ -297,6 +300,9 @@ export const Navbar: FC = () => {
               </div>
             </div>
 
+            {/* MTM Innovation 9-Dot App Switcher */}
+            <MtmAppSwitcher />
+
             {/* Mobile Hamburger Button */}
             <button
               type="button"
@@ -395,6 +401,38 @@ export const Navbar: FC = () => {
                 <FileText className="w-3.5 h-3.5 text-amber-600" />
                 <span>{t('nav.imageToPdf')}</span>
               </NavLink>
+            </div>
+          </div>
+
+          {/* MTM Innovation Ecosystem Apps */}
+          <div className="pt-3 border-t border-slate-100">
+            <div className="px-2 py-1 text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5 mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span>{t('ecosystem.title')}</span>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5">
+              {apps.map((app) => (
+                <a
+                  key={app.id}
+                  href={app.url}
+                  target={app.isCurrent ? undefined : '_blank'}
+                  rel={app.isCurrent ? undefined : 'noopener noreferrer'}
+                  onClick={closeMobile}
+                  className={`p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all ${
+                    app.isCurrent
+                      ? 'bg-primary/10 text-primary border border-primary/20'
+                      : 'text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200/60'
+                  }`}
+                >
+                  <app.icon className={`w-4 h-4 ${app.color.text}`} />
+                  <span className="truncate">{app.name}</span>
+                  {app.isCurrent && (
+                    <span className="text-[9px] bg-primary text-white px-1.5 py-0.5 rounded-full ms-auto">
+                      {t('ecosystem.currentBadge')}
+                    </span>
+                  )}
+                </a>
+              ))}
             </div>
           </div>
         </div>
