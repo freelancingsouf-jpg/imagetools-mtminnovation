@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import imageCompression from 'browser-image-compression';
 import { SEO } from '../SEO';
 import { ToolInfoSection } from '../ToolInfoSection';
+import { SeoFaqSection } from '../SeoFaqSection';
 import {
   UploadCloud,
   FileImage,
@@ -706,6 +707,9 @@ export const CompressImage: FC = () => {
 
       {/* Enrichissement du contenu SEO & Anti-Thin Content */}
       <ToolInfoSection toolId="compress" />
+
+      {/* SEO & Arabic FAQ Section */}
+      <SeoFaqSection />
 
     </div>
   );

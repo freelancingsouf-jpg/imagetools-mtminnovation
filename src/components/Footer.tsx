@@ -1,12 +1,40 @@
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Sparkles, ExternalLink } from 'lucide-react';
+import {
+  ShieldCheck,
+  Sparkles,
+  ExternalLink,
+  Share2,
+  Copy,
+  Check,
+  MessageCircle,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getOtherMtmApps } from '../config/mtmApps';
 
 export const Footer: FC = () => {
   const { t } = useTranslation();
   const otherApps = getOtherMtmApps();
+  const [copied, setCopied] = useState<boolean>(false);
+
+  const handleCopyLink = async () => {
+    try {
+      const shareUrl =
+        typeof window !== 'undefined'
+          ? window.location.origin
+          : 'https://imagetools-mtminnovation.pages.dev';
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+    'ImageTools — أدوات مجانية لضغط الصور وتغيير أبعادها وتحويل صيغها (JPG, PNG, WebP) بسرعة وأمان 100% داخل المتصفح:\nhttps://imagetools-mtminnovation.pages.dev/'
+  )}`;
 
   return (
     <footer className="w-full bg-white border-t border-slate-200 mt-auto pt-10 pb-8 transition-colors">
@@ -172,6 +200,46 @@ export const Footer: FC = () => {
                 );
               })}
             </div>
+          </div>
+        </div>
+
+        {/* Subtle Tool Share & Social Action Bar */}
+        <div className="py-4 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-700">
+            <Share2 className="w-4 h-4 text-primary" />
+            <span className="font-bold">{t('footer.shareTool')}</span>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition font-medium cursor-pointer shadow-2xs text-xs"
+              title={t('footer.copyLink')}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-600 font-bold">{t('footer.copied')}</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{t('footer.copyLink')}</span>
+                </>
+              )}
+            </button>
+
+            <a
+              href={whatsappShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-200/90 bg-emerald-50/70 hover:bg-emerald-100 text-emerald-700 transition font-medium shadow-2xs text-xs"
+              title="WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{t('footer.shareWhatsapp')}</span>
+            </a>
           </div>
         </div>
 

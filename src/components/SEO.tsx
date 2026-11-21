@@ -42,7 +42,7 @@ export const SEO: FC<SEOProps> = ({ pageKey, title, description, canonicalPath }
       <meta property="og:type" content="website" />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:site_name" content="ImageTools by MTM Innovation" />
+      <meta property="og:site_name" content="MTM Innovation" />
       {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 
       {/* Twitter */}

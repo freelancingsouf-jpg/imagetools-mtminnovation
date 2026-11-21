@@ -467,14 +467,14 @@ export const resources = {
       ecosystem: {
         title: 'Écosystème MTM Innovation',
         subtitle: 'Applications web rapides, locales et intelligentes',
-        moreApps: 'Autres outils de MTM Innovation',
+        moreApps: 'Autres outils MTM Innovation',
         currentBadge: 'Actuel',
         switcherAria: 'Changer d’application MTM',
         openInNewTab: 'Ouvrir dans un nouvel onglet',
         apps: {
           easypdf: {
-            name: 'EasyPDF',
-            tagline: 'Traitement & conversion PDF',
+            name: 'EasyPDF (Outils PDF)',
+            tagline: 'Traitement & conversion de PDF',
             desc: 'Fusion, division et conversion PDF 100% locales',
           },
           imagetools: {
@@ -483,12 +483,12 @@ export const resources = {
             desc: 'Compression, redimensionnement et filigrane sans upload',
           },
           mtmproforma: {
-            name: 'MTM Proforma',
+            name: 'MTM Proforma (Factures proforma)',
             tagline: 'Factures & devis proforma',
             desc: 'Édition et génération instantanée de factures proforma',
           },
           mtminnovation: {
-            name: 'MTM Innovation',
+            name: 'MTM Innovation (Plateforme principale)',
             tagline: 'Plateforme & vitrine officielle',
             desc: 'Découvrez notre suite d’outils digitaux innovants',
           },
@@ -498,6 +498,10 @@ export const resources = {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: '100% Local & Sécurisé',
         brandDesc: 'Suite d’outils d’images et de PDF 100% côté client, ultra-rapide et respectueuse de votre vie privée.',
+        shareTool: 'Partager cet outil',
+        copyLink: 'Copier le lien',
+        copied: 'Lien copié !',
+        shareWhatsapp: 'WhatsApp',
         sections: {
           popularTools: 'Outils populaires',
           company: 'MTM Innovation',
@@ -1032,13 +1036,13 @@ export const resources = {
       ecosystem: {
         title: 'MTM Innovation Ecosystem',
         subtitle: 'Fast, local, and smart web applications',
-        moreApps: 'More from MTM Innovation',
+        moreApps: 'Other MTM Innovation Tools',
         currentBadge: 'Current',
         switcherAria: 'Switch MTM applications',
         openInNewTab: 'Open in a new tab',
         apps: {
           easypdf: {
-            name: 'EasyPDF',
+            name: 'EasyPDF (PDF Tools)',
             tagline: 'PDF processing & conversion',
             desc: '100% local PDF merge, split, and conversion',
           },
@@ -1048,12 +1052,12 @@ export const resources = {
             desc: 'Compression, resizing, and watermark without uploads',
           },
           mtmproforma: {
-            name: 'MTM Proforma',
+            name: 'MTM Proforma (Invoices)',
             tagline: 'Proforma & invoice generator',
             desc: 'Instant proforma invoice creation and export',
           },
           mtminnovation: {
-            name: 'MTM Innovation',
+            name: 'MTM Innovation (Main Platform)',
             tagline: 'Main platform & showcase',
             desc: 'Discover our suite of innovative digital tools',
           },
@@ -1063,6 +1067,10 @@ export const resources = {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: '100% Local & Private',
         brandDesc: 'Ultra-fast, 100% client-side image and PDF tool suite engineered with total privacy in mind.',
+        shareTool: 'Share this tool',
+        copyLink: 'Copy link',
+        copied: 'Copied!',
+        shareWhatsapp: 'WhatsApp',
         sections: {
           popularTools: 'Popular Tools',
           company: 'MTM Innovation',
@@ -1597,13 +1605,13 @@ export const resources = {
       ecosystem: {
         title: 'منظومة MTM Innovation',
         subtitle: 'تطبيقات ويب سريعة ومحلية وذكية',
-        moreApps: 'أدوات أخرى من MTM Innovation',
+        moreApps: 'أدوات MTM Innovation الأخرى',
         currentBadge: 'الحالي',
         switcherAria: 'التبديل بين تطبيقات MTM',
         openInNewTab: 'فتح في علامة تبويب جديدة',
         apps: {
           easypdf: {
-            name: 'EasyPDF',
+            name: 'EasyPDF (أدوات PDF)',
             tagline: 'معالجة وتحويل ملفات PDF',
             desc: 'دمج وتقسيم وتحويل PDF محلياً 100٪ بدون رفع',
           },
@@ -1613,13 +1621,13 @@ export const resources = {
             desc: 'ضغط وتغيير حجم وعلامات مائية محلية بدون خوادم',
           },
           mtmproforma: {
-            name: 'MTM Proforma',
+            name: 'MTM Proforma (الفواتير الشكلية)',
             tagline: 'منشئ الفواتير وعروض الأسعار',
             desc: 'إنشاء وتصدير الفواتير الاحترافية فورياً',
           },
           mtminnovation: {
-            name: 'MTM Innovation',
-            tagline: 'المنصة الرئيسية والمشاريع',
+            name: 'المنصة الرئيسية (MTM Innovation)',
+            tagline: 'المنصة الرئيسية وباقة المشاريع',
             desc: 'اكتشف باقة أدواتنا وحلولنا الرقمية المبتكرة',
           },
         },
@@ -1628,6 +1636,10 @@ export const resources = {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: 'معالجة محلية وآمنة 100%',
         brandDesc: 'حزمة أدوات متطورة للصور وملفات PDF تعمل 100% داخل المتصفح بأقصى سرعة وخصوصية مطلقة.',
+        shareTool: 'مشاركة الأداة',
+        copyLink: 'نسخ الرابط',
+        copied: 'تم النسخ بنجاح!',
+        shareWhatsapp: 'واتساب',
         sections: {
           popularTools: 'أدوات شائعة',
           company: 'MTM Innovation',
@@ -2162,13 +2174,13 @@ export const resources = {
       ecosystem: {
         title: 'MTM Innovation 产品矩阵',
         subtitle: '极速、纯本地且智能的现代 Web 应用',
-        moreApps: '更多 MTM Innovation 产品',
+        moreApps: 'MTM Innovation 其他工具',
         currentBadge: '当前应用',
         switcherAria: '切换 MTM 应用',
         openInNewTab: '在新标签页中打开',
         apps: {
           easypdf: {
-            name: 'EasyPDF',
+            name: 'EasyPDF (PDF 工具)',
             tagline: 'PDF 处理与格式转换',
             desc: '100% 浏览器本地 PDF 合并、拆分与转换',
           },
@@ -2178,12 +2190,12 @@ export const resources = {
             desc: '纯本地图片压缩、尺寸调整与防盗水印',
           },
           mtmproforma: {
-            name: 'MTM Proforma',
+            name: 'MTM Proforma (形式发票)',
             tagline: '形式发票与专业账单生成器',
             desc: '快速制作并导出合规形式发票与报价单',
           },
           mtminnovation: {
-            name: 'MTM Innovation',
+            name: 'MTM Innovation (主平台)',
             tagline: '官方主页与创新技术展示',
             desc: '探索 MTM Innovation 旗下全套前沿数字工具',
           },
@@ -2193,6 +2205,10 @@ export const resources = {
         copyright: '© 2026 MTM Innovation. Privacy First (Local Processing)',
         localBadge: '100% 本地安全处理',
         brandDesc: '极速、现代且100%客户端本地处理的图片与PDF工具箱，全面守护您的数据隐私。',
+        shareTool: '分享工具',
+        copyLink: '复制链接',
+        copied: '已复制！',
+        shareWhatsapp: 'WhatsApp 分享',
         sections: {
           popularTools: '常用热门工具',
           company: 'MTM Innovation',

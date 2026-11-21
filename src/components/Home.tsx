@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { SEO } from './SEO';
+import { SeoFaqSection } from './SeoFaqSection';
 import {
   Search,
   Sparkles,
@@ -443,6 +444,11 @@ export const Home: FC = () => {
         )}
 
       </section>
+
+      {/* SEO & Arabic FAQ Section (Structured Data & High Value Content) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
+        <SeoFaqSection />
+      </div>
 
     </div>
   );
