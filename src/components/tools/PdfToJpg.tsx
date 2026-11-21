@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type FC, type DragEvent, type ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, type FC, type DragEvent, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
@@ -14,7 +14,8 @@ import {
   RefreshCw,
   CheckCircle2,
   Archive,
-  Image as ImageIcon
+  Image as ImageIcon,
+  XCircle
 } from 'lucide-react';
 import { formatBytes } from './CompressImage';
 
@@ -29,7 +30,6 @@ interface PdfFileMetadata {
   name: string;
   size: number;
   totalPages: number;
-  arrayBuffer: ArrayBuffer;
 }
 
 interface RenderedPage {
@@ -59,21 +59,63 @@ export const PdfToJpg: FC = () => {
   const [renderedPages, setRenderedPages] = useState<RenderedPage[]>([]);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  // Refs for memory cleanup
+  // Refs for memory cleanup and cancellation
   const fileInputRef = useRef<HTMLInputElement>(null);
   const renderedPagesRef = useRef<RenderedPage[]>([]);
+  const cancelRequestedRef = useRef<boolean>(false);
+  const activeRenderTaskRef = useRef<any>(null);
+  const activeDocRef = useRef<pdfjsLib.PDFDocumentProxy | null>(null);
+  const activeLoadingTaskRef = useRef<pdfjsLib.PDFDocumentLoadingTask | null>(null);
 
   useEffect(() => {
     renderedPagesRef.current = renderedPages;
   }, [renderedPages]);
 
-  // Clean memory on unmount
+  // Clean memory on unmount: cancel tasks, release docs, and revoke all object URLs
   useEffect(() => {
     return () => {
+      cancelRequestedRef.current = true;
+      if (activeRenderTaskRef.current) {
+        try {
+          activeRenderTaskRef.current.cancel();
+        } catch {
+          // ignore task cancellation error
+        }
+        activeRenderTaskRef.current = null;
+      }
+      if (activeDocRef.current) {
+        try {
+          activeDocRef.current.cleanup();
+        } catch {
+          // ignore doc cleanup error
+        }
+        activeDocRef.current = null;
+      }
+      if (activeLoadingTaskRef.current) {
+        try {
+          activeLoadingTaskRef.current.destroy();
+        } catch {
+          // ignore loading task destroy error
+        }
+        activeLoadingTaskRef.current = null;
+      }
       renderedPagesRef.current.forEach((page) => {
         URL.revokeObjectURL(page.url);
       });
     };
+  }, []);
+
+  // Cancellation handler for user
+  const handleCancelConversion = useCallback(() => {
+    cancelRequestedRef.current = true;
+    if (activeRenderTaskRef.current) {
+      try {
+        activeRenderTaskRef.current.cancel();
+      } catch {
+        // ignore cancellation error
+      }
+      activeRenderTaskRef.current = null;
+    }
   }, []);
 
   // Handle incoming PDF file
@@ -92,10 +134,13 @@ export const PdfToJpg: FC = () => {
     });
     setRenderedPages([]);
 
+    let loadingTask: pdfjsLib.PDFDocumentLoadingTask | null = null;
+    let doc: pdfjsLib.PDFDocumentProxy | null = null;
+
     try {
       const buffer = await file.arrayBuffer();
-      const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(buffer) });
-      const doc = await loadingTask.promise;
+      loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(buffer) });
+      doc = await loadingTask.promise;
       const totalPages = doc.numPages;
 
       setLoadedPdf({
@@ -103,11 +148,26 @@ export const PdfToJpg: FC = () => {
         name: file.name,
         size: file.size,
         totalPages,
-        arrayBuffer: buffer
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error('Inspection error:', err);
-      setErrorMessage(t('tools.pdfToJpg.errorProcessing'));
+      if (err?.name === 'PasswordException') {
+        setErrorMessage('Ce fichier PDF est protégé par mot de passe. Veuillez fournir un document non chiffré.');
+      } else {
+        setErrorMessage(t('tools.pdfToJpg.errorProcessing'));
+      }
+    } finally {
+      // Memory cleanup: release inspection document instance immediately
+      if (doc) {
+        try {
+          doc.cleanup();
+        } catch {}
+      }
+      if (loadingTask) {
+        try {
+          loadingTask.destroy();
+        } catch {}
+      }
     }
   };
 
@@ -148,84 +208,152 @@ export const PdfToJpg: FC = () => {
     setErrorMessage(null);
     setIsProcessing(true);
     setIsSuccess(false);
+    cancelRequestedRef.current = false;
 
-    // Clear previous pages
+    // Clear previous pages before starting fresh conversion
     renderedPagesRef.current.forEach((page) => URL.revokeObjectURL(page.url));
     setRenderedPages([]);
 
+    let loadingTask: pdfjsLib.PDFDocumentLoadingTask | null = null;
+    let doc: pdfjsLib.PDFDocumentProxy | null = null;
+
     try {
-      const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(loadedPdf.arrayBuffer) });
-      const doc = await loadingTask.promise;
+      const freshBuffer = await loadedPdf.file.arrayBuffer();
+      loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(freshBuffer) });
+      activeLoadingTaskRef.current = loadingTask;
+      doc = await loadingTask.promise;
+      activeDocRef.current = doc;
       const total = doc.numPages;
 
       const outputPages: RenderedPage[] = [];
 
       for (let pageNum = 1; pageNum <= total; pageNum++) {
+        if (cancelRequestedRef.current) {
+          break;
+        }
+
         setCurrentProgress({ current: pageNum, total });
 
-        const page = await doc.getPage(pageNum);
+        let page: pdfjsLib.PDFPageProxy | null = null;
+        let canvas: HTMLCanvasElement | null = null;
+        let ctx: CanvasRenderingContext2D | null = null;
 
-        // Mobile memory guard: Clamp scale if page dimensions would exceed 3072px
-        let currentScale = scale;
-        const unscaledViewport = page.getViewport({ scale: 1.0 });
-        if (unscaledViewport.width * currentScale > 3072 || unscaledViewport.height * currentScale > 3072) {
-          currentScale = Math.min(3072 / unscaledViewport.width, 3072 / unscaledViewport.height);
-        }
-        const viewport = page.getViewport({ scale: currentScale });
+        try {
+          page = await doc.getPage(pageNum);
 
-        // Render onto offscreen canvas
-        const canvas = document.createElement('canvas');
-        const cWidth = Math.round(viewport.width);
-        const cHeight = Math.round(viewport.height);
-        canvas.width = cWidth;
-        canvas.height = cHeight;
-        const ctx = canvas.getContext('2d');
+          if (cancelRequestedRef.current) {
+            break;
+          }
 
-        if (!ctx) continue;
+          // Mobile memory guard: Clamp scale if page dimensions would exceed 3072px
+          let currentScale = scale;
+          const unscaledViewport = page.getViewport({ scale: 1.0 });
+          if (unscaledViewport.width * currentScale > 3072 || unscaledViewport.height * currentScale > 3072) {
+            currentScale = Math.min(3072 / unscaledViewport.width, 3072 / unscaledViewport.height);
+          }
+          const viewport = page.getViewport({ scale: currentScale });
 
-        // White background for JPG transparency safety
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, cWidth, cHeight);
+          // Render onto offscreen canvas
+          canvas = document.createElement('canvas');
+          const cWidth = Math.round(viewport.width);
+          const cHeight = Math.round(viewport.height);
+          canvas.width = cWidth;
+          canvas.height = cHeight;
+          ctx = canvas.getContext('2d');
 
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport,
-          canvas: canvas
-        };
+          if (!ctx) continue;
 
-        await page.render(renderContext).promise;
+          // White background for JPG transparency safety
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, cWidth, cHeight);
 
-        // Export to JPG blob
-        const blob = await new Promise<Blob | null>((resolve) => {
-          canvas.toBlob((b) => resolve(b), 'image/jpeg', 0.92);
-        });
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport,
+            canvas: canvas,
+          };
 
-        // CRITICAL MEMORY CLEANUP: Release canvas backing store from GPU/Safari memory
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        canvas.width = 0;
-        canvas.height = 0;
+          const renderTask = page.render(renderContext);
+          activeRenderTaskRef.current = renderTask;
+          await renderTask.promise;
+          activeRenderTaskRef.current = null;
 
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          outputPages.push({
-            pageNum,
-            url,
-            blob,
-            width: cWidth,
-            height: cHeight,
-            size: blob.size
+          if (cancelRequestedRef.current) {
+            break;
+          }
+
+          // Export to JPG blob
+          const blob = await new Promise<Blob | null>((resolve) => {
+            canvas!.toBlob((b) => resolve(b), 'image/jpeg', 0.92);
           });
+
+          if (blob && !cancelRequestedRef.current) {
+            const url = URL.createObjectURL(blob);
+            outputPages.push({
+              pageNum,
+              url,
+              blob,
+              width: cWidth,
+              height: cHeight,
+              size: blob.size,
+            });
+          }
+        } finally {
+          // Release canvas backing store from GPU / Safari memory immediately
+          if (ctx && canvas) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.width = 0;
+            canvas.height = 0;
+            canvas = null;
+            ctx = null;
+          }
+
+          // Release page resources (font glyph caches, stream decoders)
+          if (page) {
+            try {
+              page.cleanup();
+            } catch {}
+            page = null;
+          }
         }
       }
 
-      setRenderedPages(outputPages);
-      setIsSuccess(true);
-    } catch (err) {
-      console.error('PDF to JPG conversion error:', err);
-      setErrorMessage(t('tools.pdfToJpg.errorProcessing'));
+      if (!cancelRequestedRef.current) {
+        setRenderedPages(outputPages);
+        setIsSuccess(outputPages.length > 0);
+      } else {
+        // If cancelled, revoke newly created URLs immediately to prevent memory leak
+        outputPages.forEach((p) => URL.revokeObjectURL(p.url));
+      }
+    } catch (err: any) {
+      if (err?.name === 'RenderingCancelledException' || cancelRequestedRef.current) {
+        console.log('PDF rendering was cancelled by user.');
+      } else if (err?.name === 'PasswordException') {
+        setErrorMessage('Ce fichier PDF est protégé par mot de passe. Veuillez fournir un document non chiffré.');
+      } else {
+        console.error('PDF to JPG conversion error:', err);
+        setErrorMessage(t('tools.pdfToJpg.errorProcessing'));
+      }
     } finally {
+      activeRenderTaskRef.current = null;
       setIsProcessing(false);
       setCurrentProgress({ current: 0, total: 0 });
+
+      // Clean up document and loading task resources
+      if (doc) {
+        try {
+          doc.cleanup();
+        } catch {}
+        activeDocRef.current = null;
+        doc = null;
+      }
+      if (loadingTask) {
+        try {
+          loadingTask.destroy();
+        } catch {}
+        activeLoadingTaskRef.current = null;
+        loadingTask = null;
+      }
     }
   };
 
@@ -267,7 +395,7 @@ export const PdfToJpg: FC = () => {
       link.click();
       document.body.removeChild(link);
 
-      setTimeout(() => URL.revokeObjectURL(zipUrl), 3000);
+      setTimeout(() => URL.revokeObjectURL(zipUrl), 10000);
     } catch (err) {
       console.error('ZIP generation error:', err);
       setErrorMessage('Une erreur est survenue lors de la création de l’archive ZIP.');
@@ -464,9 +592,17 @@ export const PdfToJpg: FC = () => {
             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-slate-500">
                 {isProcessing && currentProgress.total > 0 && (
-                  <div className="flex items-center gap-2 font-semibold text-primary">
+                  <div className="flex items-center gap-3 font-semibold text-primary">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span>Conversion de la page {currentProgress.current} sur {currentProgress.total}...</span>
+                    <button
+                      type="button"
+                      onClick={handleCancelConversion}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors cursor-pointer"
+                    >
+                      <XCircle className="w-3.5 h-3.5" />
+                      <span>Annuler</span>
+                    </button>
                   </div>
                 )}
               </div>
